@@ -1,35 +1,13 @@
-import { FirebaseApp, initializeApp } from 'firebase/app';
-import { getFirestore, Firestore } from 'firebase/firestore';
-import { getAnalytics } from 'firebase/analytics';
-import { getAuth, onAuthStateChanged, signInAnonymously } from "firebase/auth";
 import Head from 'next/head';
 import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import LeftBar from './leftbar';
 import RightBar from './rightbar';
-import { FirebaseStorage, getStorage } from 'firebase/storage';
 import Link from 'next/link';
 
-const firebaseConfig = {
-    apiKey: "AIzaSyDbxrdE4Yh-4CVNrtcUT3jrGgn_uiOcmd8",
-    authDomain: "liz-landing.firebaseapp.com",
-    projectId: "liz-landing",
-    storageBucket: "liz-landing.appspot.com",
-    messagingSenderId: "341469303807",
-    appId: "1:341469303807:web:ebe54e2b907425538ccdca",
-    measurementId: "G-Y9SWCV2N0R"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const storage = getStorage(app);
-let analytics;
-if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
-    analytics = getAnalytics(app);
-}
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
-const LayoutContext = React.createContext<{ app: FirebaseApp, db: Firestore, storage: FirebaseStorage }>({ app, db, storage });
+const LayoutContext = React.createContext<{ }>({ });
 
 type LayoutProps = {
     children: React.ReactNode;
@@ -42,26 +20,26 @@ export default function Layout({ children }: LayoutProps) {
         if (didRunRef.current === false) {
             didRunRef.current = true;
 
-            const auth = getAuth();
-            let unsub = onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    // console.log('Layout/useEffect/onAuthStateChanged/logged-in', user);
-                } else {
-                    // console.log('Layout/useEffect/onAuthStateChanged/logged-out');
-                    if (!auth.currentUser) {
-                        signInAnonymously(auth)
-                            .then(() => {
-                                // console.log('Layout/useEffect/onAuthStateChanged/signInAnonymously', auth.currentUser);
-                            })
-                            .catch((error) => {
-                                const errorCode = error.code;
-                                const errorMessage = error.message;
-                                console.log(errorCode, errorMessage);
-                            });
-                    }
-                }
-            });
-            return unsub();
+            // const auth = getAuth();
+            // let unsub = onAuthStateChanged(auth, (user) => {
+            //     if (user) {
+            //         // console.log('Layout/useEffect/onAuthStateChanged/logged-in', user);
+            //     } else {
+            //         // console.log('Layout/useEffect/onAuthStateChanged/logged-out');
+            //         if (!auth.currentUser) {
+            //             signInAnonymously(auth)
+            //                 .then(() => {
+            //                     // console.log('Layout/useEffect/onAuthStateChanged/signInAnonymously', auth.currentUser);
+            //                 })
+            //                 .catch((error) => {
+            //                     const errorCode = error.code;
+            //                     const errorMessage = error.message;
+            //                     console.log(errorCode, errorMessage);
+            //                 });
+            //         }
+            //     }
+            // });
+            // return unsub();
         }
     }, []);
 
@@ -86,7 +64,7 @@ export default function Layout({ children }: LayoutProps) {
                 <meta name="description" content="My landing page" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <LayoutContext.Provider value={{ app, db, storage }}>
+            <LayoutContext.Provider value={{ }}>
                 <LeftBar />
                 <RightBar />
                 <div>

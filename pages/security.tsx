@@ -1,4 +1,3 @@
-import { getAuth } from 'firebase/auth';
 
 export default function Security() {
 
@@ -6,7 +5,7 @@ export default function Security() {
         <div className='flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-8'>
             <div className='bg-yellow-liz text-black-liz p-4 rounded-xl flex flex-col justify-center'>
                 <div className='font-bold'>Anonymous ID</div>
-                <div className='text-xs'>{getAuth().currentUser?.uid}</div>
+                <div className='text-xs'>{`getAuth().currentUser?.uid`}</div>
             </div>
             <div className='bg-black p-4 rounded-xl'>
                 <div className='text-gray-300 text-2xl'>npm supply chain attack</div>

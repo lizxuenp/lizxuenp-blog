@@ -8,17 +8,15 @@ import octocat from '../public/Octocat.png';
 import { BeakerIcon, DotsCircleHorizontalIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import { LayoutContext } from '../components/layout';
-import { collection, DocumentData, getDocs } from 'firebase/firestore';
 import Post from '../components/post';
 import Like from '../components/like';
 
 const Home: NextPage = () => {
-  const { db } = useContext(LayoutContext);
+  // const { db } = useContext(LayoutContext);
   const router = useRouter();
-  const [currentUser, setCurentUser] = useState<User | null>(null);
-  const [posts, setPosts] = useState<DocumentData[]>([]);
+  // const [currentUser, setCurentUser] = useState<User | null>(null);
+  // const [posts, setPosts] = useState<DocumentData[]>([]);
 
   const didRunRef = useRef(false);
 
@@ -27,29 +25,29 @@ const Home: NextPage = () => {
       didRunRef.current = true;
 
       // console.log('index/useEffect');
-      const auth = getAuth();
-      let unsub = onAuthStateChanged(auth, (user) => {
-        if (user) {
-          // console.log('index/useEffect/setCurentUser(user)', user);
-          setCurentUser(user);
+      // const auth = getAuth();
+      // let unsub = onAuthStateChanged(auth, (user) => {
+      //   if (user) {
+      //     // console.log('index/useEffect/setCurentUser(user)', user);
+      //     setCurentUser(user);
 
-          const postsData: DocumentData[] = [];
-          const getPosts = async () => {
-            let postDocs = await getDocs(collection(db, "posts"));
-            postDocs.forEach((doc) => {
-              postsData.push({ ...doc.data(), id: doc.id });
-            });
-            // console.log(postsData);
-            setPosts(postsData);
-          }
-          getPosts();
+      //     const postsData: DocumentData[] = [];
+      //     const getPosts = async () => {
+      //       let postDocs = await getDocs(collection(db, "posts"));
+      //       postDocs.forEach((doc) => {
+      //         postsData.push({ ...doc.data(), id: doc.id });
+      //       });
+      //       // console.log(postsData);
+      //       setPosts(postsData);
+      //     }
+      //     getPosts();
 
-        } else {
-          // console.log('index/useEffect/setCurentUser(null)');
-          setCurentUser(null);
-        }
-      });
-      return unsub();
+      //   } else {
+      //     // console.log('index/useEffect/setCurentUser(null)');
+      //     setCurentUser(null);
+      //   }
+      // });
+      // return unsub();
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -97,9 +95,9 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        {
+        {/* {
           currentUser && posts.map((item) => <Post key={`${item.id}`} user={currentUser} imgref={item.imgref} link={item.link} postId={item.id} likedBy={item.likedBy} />)
-        }
+        } */}
       </div>
 
     </div>

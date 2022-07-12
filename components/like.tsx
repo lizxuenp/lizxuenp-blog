@@ -1,6 +1,4 @@
 import { HeartIcon } from '@heroicons/react/solid';
-import { User } from 'firebase/auth';
-import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { LayoutContext } from './layout';
 type LikeProps = {
@@ -10,7 +8,6 @@ type LikeProps = {
 }
 
 export default function Like({ postId, likedBy, user }: LikeProps) {
-    const { db } = useContext(LayoutContext);
     const [liked, setLiked] = useState(false);
     const [likedCount, setLikedCount] = useState(likedBy.length);
     const [waitClick, setWaitClick] = useState(true);
@@ -31,24 +28,24 @@ export default function Like({ postId, likedBy, user }: LikeProps) {
     const handleClick = () => {
         if (waitClick) {
             setWaitClick(false);
-            const postRef = doc(db, "posts", postId);
-            if (liked) {
-                updateDoc(postRef, { likedBy: arrayRemove(user?.uid) })
-                .then(() => {
-                    setLiked(false);
-                    setLikedCount(prev => --prev);
-                    setWaitClick(true);
-                })
-                .catch(e => console.log(e));
-            } else {
-                updateDoc(postRef, { likedBy: arrayUnion(user?.uid) })
-                .then(() => {
-                    setLiked(true);
-                    setLikedCount(prev => ++prev);
-                    setWaitClick(true);
-                })
-                .catch(e => console.log(e));
-            }
+            // const postRef = doc(db, "posts", postId);
+            // if (liked) {
+            //     updateDoc(postRef, { likedBy: arrayRemove(user?.uid) })
+            //     .then(() => {
+            //         setLiked(false);
+            //         setLikedCount(prev => --prev);
+            //         setWaitClick(true);
+            //     })
+            //     .catch(e => console.log(e));
+            // } else {
+            //     updateDoc(postRef, { likedBy: arrayUnion(user?.uid) })
+            //     .then(() => {
+            //         setLiked(true);
+            //         setLikedCount(prev => ++prev);
+            //         setWaitClick(true);
+            //     })
+            //     .catch(e => console.log(e));
+            // }
         }
     }
     return (

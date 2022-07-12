@@ -2,12 +2,10 @@ import { DotsCircleHorizontalIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useRef, useState } from "react";
 import { LayoutContext } from './layout';
-import { getDownloadURL, ref } from "firebase/storage";
-import { User } from "firebase/auth";
 import Image from "next/image";
 import Like from "./like";
 
-export default function Post({ user, imgref, link, postId, likedBy }: { user: User, imgref: string, link: string, postId: string, likedBy: string[] }) {
+export default function Post({ user, imgref, link, postId, likedBy }: { user: string, imgref: string, link: string, postId: string, likedBy: string[] }) {
     const router = useRouter();
     const context = useContext(LayoutContext);
     const didRunRef = useRef(false);
@@ -17,14 +15,14 @@ export default function Post({ user, imgref, link, postId, likedBy }: { user: Us
     useEffect(() => {
         if (didRunRef.current === false) {
             didRunRef.current = true;
-            getDownloadURL(ref(context.storage, imgref))
-                .then((imgURL) => {
-                    setUrl(imgURL);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-            // setUrl('/online.jpg');
+            // getDownloadURL(ref(context.storage, imgref))
+            //     .then((imgURL) => {
+            //         setUrl(imgURL);
+            //     })
+            //     .catch((error) => {
+            //         console.log(error);
+            //     });
+            setUrl('/online.jpg');
         }
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

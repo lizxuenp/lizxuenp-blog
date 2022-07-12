@@ -1,10 +1,11 @@
 import { HeartIcon } from '@heroicons/react/solid';
 import { useContext, useEffect, useRef, useState } from 'react';
+import { StringDecoder } from 'string_decoder';
 import { LayoutContext } from './layout';
 type LikeProps = {
     postId: string;
     likedBy: string[];
-    user: User | null;
+    user: string;
 }
 
 export default function Like({ postId, likedBy, user }: LikeProps) {
@@ -16,7 +17,7 @@ export default function Like({ postId, likedBy, user }: LikeProps) {
     useEffect(() => {
         if (didRunRef.current === false) {
             didRunRef.current = true;
-            const found = likedBy.find(el => el === user?.uid);
+            const found = likedBy.find(el => el === user);
             if (found) {
                 setLiked(true);
             } else {

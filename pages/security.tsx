@@ -1,6 +1,14 @@
 
 export default function Security() {
 
+    const handleTest1 = () => {
+        console.log('test1');
+        fetch('/api/test1')
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(er => console.log(er));
+    }
+
     return (
         <div className='flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-8'>
             <div className='bg-yellow-liz text-black-liz p-4 rounded-xl flex flex-col justify-center'>
@@ -25,7 +33,9 @@ export default function Security() {
                     more...
                 </a>
             </div>
-
+            <div>
+                <button onClick={handleTest1} className='bg-red-400 p-4 rounded-md'>Test1</button>
+            </div>
 
         </div>
     );

@@ -4,7 +4,6 @@ import LeftBar from './leftbar';
 import RightBar from './rightbar';
 import Link from 'next/link';
 
-
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 const LayoutContext = React.createContext<{ }>({ });

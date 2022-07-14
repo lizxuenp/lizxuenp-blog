@@ -1,9 +1,10 @@
 import { HeartIcon } from '@heroicons/react/solid';
+import { ObjectId } from 'mongodb';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { StringDecoder } from 'string_decoder';
 import { LayoutContext } from './layout';
 type LikeProps = {
-    postId: string;
+    postId: ObjectId;
     likedBy: string[];
     user: string;
 }

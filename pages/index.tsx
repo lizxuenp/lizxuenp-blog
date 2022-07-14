@@ -7,16 +7,14 @@ import octocat from '../public/Octocat.png';
 
 import { BeakerIcon, DotsCircleHorizontalIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useRef, useState } from 'react';
-import { LayoutContext } from '../components/layout';
+import { useEffect, useRef, useState } from 'react';
 import Post from '../components/post';
-import Like from '../components/like';
+import { TPost } from '../db/mongo';
 
 const Home: NextPage = () => {
-  // const { db } = useContext(LayoutContext);
   const router = useRouter();
   // const [currentUser, setCurentUser] = useState<User | null>(null);
-  // const [posts, setPosts] = useState<DocumentData[]>([]);
+  const [posts, setPosts] = useState<TPost[]>([]);
 
   const didRunRef = useRef(false);
 
@@ -31,16 +29,16 @@ const Home: NextPage = () => {
       //     // console.log('index/useEffect/setCurentUser(user)', user);
       //     setCurentUser(user);
 
-      //     const postsData: DocumentData[] = [];
-      //     const getPosts = async () => {
-      //       let postDocs = await getDocs(collection(db, "posts"));
-      //       postDocs.forEach((doc) => {
-      //         postsData.push({ ...doc.data(), id: doc.id });
-      //       });
-      //       // console.log(postsData);
-      //       setPosts(postsData);
-      //     }
-      //     getPosts();
+      // const postsData: TPost[] = [];
+      const getPosts = async () => {
+        fetch('/api/posts')
+          .then(res => res.json())
+          .then(data => {
+            setPosts(data);
+          })
+          .catch(err => console.error(err));
+      }
+      getPosts();
 
       //   } else {
       //     // console.log('index/useEffect/setCurentUser(null)');
@@ -98,6 +96,10 @@ const Home: NextPage = () => {
         {/* {
           currentUser && posts.map((item) => <Post key={`${item.id}`} user={currentUser} imgref={item.imgref} link={item.link} postId={item.id} likedBy={item.likedBy} />)
         } */}
+
+        {
+          posts.map((item) => <Post key={`${item._id}`} user={''} imgurl={item.imgurl} link={item.link} postId={item._id} likedBy={item.likedBy} />)
+        }
       </div>
 
     </div>

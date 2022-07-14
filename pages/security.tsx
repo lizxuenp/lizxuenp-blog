@@ -4,9 +4,16 @@ export default function Security() {
     const handleTest1 = () => {
         console.log('test1');
         fetch('/api/test1')
-        .then(res => res.json())
+        .then(res => {
+            if (res.ok) {
+                return res.json();
+             } else {
+                throw new Error(res.statusText);
+             }
+        })
         .then(data => console.log(data))
-        .catch(er => console.log(er));
+        // .catch(er => console.log(er));
+        .catch(er => console.log('found error'));
     }
 
     return (

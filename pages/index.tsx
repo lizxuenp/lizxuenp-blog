@@ -12,7 +12,6 @@ import { TPost } from '../db/mongo';
 
 const Home: NextPage = () => {
   const router = useRouter();
-  // const [currentUser, setCurentUser] = useState<User | null>(null);
   const [posts, setPosts] = useState<TPost[]>([]);
 
   const didRunRef = useRef(false);
@@ -21,14 +20,6 @@ const Home: NextPage = () => {
     if (didRunRef.current === false) {
       didRunRef.current = true;
 
-      // console.log('index/useEffect');
-      // const auth = getAuth();
-      // let unsub = onAuthStateChanged(auth, (user) => {
-      //   if (user) {
-      //     // console.log('index/useEffect/setCurentUser(user)', user);
-      //     setCurentUser(user);
-
-      // const postsData: TPost[] = [];
       const getPosts = async () => {
         fetch('/api/posts')
           .then(res => res.json())
@@ -38,13 +29,6 @@ const Home: NextPage = () => {
           .catch(err => console.error(err));
       }
       getPosts();
-
-      //   } else {
-      //     // console.log('index/useEffect/setCurentUser(null)');
-      //     setCurentUser(null);
-      //   }
-      // });
-      // return unsub();
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

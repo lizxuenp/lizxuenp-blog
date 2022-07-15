@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import sec from '../public/cyber-4511128_960_720.jpg';
-import IOT from '../public/online.jpg';
 import IMG4 from '../public/IMG4-removebg-preview.png';
 import octocat from '../public/Octocat.png';
 
@@ -73,33 +72,40 @@ const Home: NextPage = () => {
       </div>
       <div className='flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-8'>
 
+        {
+          !posts.length ?
+            <div className='h-full w-full flex items-center justify-center'>
+              <svg className="animate-spin -ml-1 mr-3 h-8 w-8 text-white-liz" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </div>
+            :
+            posts.map((item) => <Post key={`${item._id}`} user={''} imgurl={item.imgurl} link={item.link} postId={item._id} likedBy={item.likedBy} />)
+        }
+
+        <div className='dark:bg-white bg-gray-700 shadow-md dark:shadow-xl rounded-3xl h-[200px] cursor-pointer' onClick={() => router.push('/curiousity')}>
+          <div className='h-full w-full relative group'>
+            <Image src={'https://res.cloudinary.com/lizxuen/image/upload/v1657864872/cultivate-curiousity_hczngn.avif'} alt='Curiousity' layout='fill' objectFit='cover' className='rounded-3xl' />
+            <div className='absolute z-50 bottom-2 left-2'>
+              <div className='font-bold text-lg text-gray-300 hover:text-yellow-liz group-hover:text-yellow-liz pb-1'>My Curiousity</div>
+            </div>
+            <div className='absolute z-50 bottom-2 right-2'>
+              <DotsCircleHorizontalIcon className='h-10 text-gray-300 hover:text-yellow-liz group-hover:text-yellow-liz' />
+            </div>
+          </div>
+        </div>
+
         <div className='bg-white dark:bg-gray-700 shadow-md dark:shadow-xl rounded-3xl h-[200px]'>
           <div className='h-[160px] w-full relative'>
             <Image src={sec} alt='sec' layout='fill' objectFit='cover' className='rounded-3xl' />
           </div>
-          <div className='flex items-center justify-end h-[40px] px-4'>
-            {/* <Like likedBy={['']} user={currentUser} /> */}
-            <DotsCircleHorizontalIcon className='h-6 cursor-pointer text-gray-300 hover:text-yellow-liz' onClick={() => router.push('/security')} />
+          <div className='flex items-center justify-between h-[40px] px-4 cursor-pointer group' onClick={() => router.push('/security')}>
+            <div className='text-gray-300 group-hover:text-yellow-liz'>Security Stuffs</div>
+            <DotsCircleHorizontalIcon className='h-6 text-gray-300 group-hover:text-yellow-liz' />
           </div>
         </div>
 
-        <div className='dark:bg-white bg-gray-700 shadow-md dark:shadow-xl rounded-3xl h-[200px]'>
-          <div className='h-[160px] w-full relative'>
-            <Image src={IOT} alt='IOT' layout='fill' objectFit='cover' className='rounded-3xl' />
-          </div>
-          <div className='flex items-center justify-end h-[40px] px-4'>
-            {/* <Like likedBy={['']} user={currentUser} /> */}
-            <DotsCircleHorizontalIcon className='h-6 cursor-pointer text-gray-300 hover:text-yellow-liz' onClick={() => router.push('/')} />
-          </div>
-        </div>
-
-        {/* {
-          currentUser && posts.map((item) => <Post key={`${item.id}`} user={currentUser} imgref={item.imgref} link={item.link} postId={item.id} likedBy={item.likedBy} />)
-        } */}
-
-        {
-          posts.map((item) => <Post key={`${item._id}`} user={''} imgurl={item.imgurl} link={item.link} postId={item._id} likedBy={item.likedBy} />)
-        }
       </div>
 
     </div>

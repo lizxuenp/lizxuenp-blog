@@ -1,20 +1,6 @@
+import TestDB from "../components/testdb/testdb";
 
 export default function Security() {
-
-    const handleTest1 = () => {
-        console.log('test1');
-        fetch('/api/test1')
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-             } else {
-                throw new Error(res.statusText);
-             }
-        })
-        .then(data => console.log(data))
-        // .catch(er => console.log(er));
-        .catch(er => console.log('found error'));
-    }
 
     return (
         <div className='flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-8'>
@@ -40,10 +26,6 @@ export default function Security() {
                     more...
                 </a>
             </div>
-            <div>
-                <button onClick={handleTest1} className='bg-red-400 p-4 rounded-md'>Test1</button>
-            </div>
-
         </div>
     );
 }

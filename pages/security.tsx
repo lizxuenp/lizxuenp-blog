@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Security() {
     const { data: session } = useSession();
 
-    const handleSignInWithGithub = () => {
+    const handleSignIn = () => {
         if (!session) {
             signIn();
         } else {
@@ -34,12 +34,12 @@ export default function Security() {
                         </div>
                         :
                         <div className='col-span-2 bg-yellow-liz text-black-liz p-4 rounded-xl flex flex-col justify-center gap-2'>
-                            <div className='font-bold text-2xl'>Sign In</div>
+                            <div className='font-bold text-2xl'>Authentication</div>
                             <button
                                 className='bg-black-liz text-white-liz py-2 px-4 m-auto rounded-xl'
-                                onClick={handleSignInWithGithub}
+                                onClick={handleSignIn}
                             >
-                                Sign In with Github
+                                Sign In
                             </button>
                         </div>
                 }

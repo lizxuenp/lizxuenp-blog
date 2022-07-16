@@ -6,31 +6,31 @@ import octocat from '../public/Octocat.png';
 
 import { BeakerIcon, DotsCircleHorizontalIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+// import { useEffect, useRef, useState } from 'react';
 import Post from '../components/post';
-import { TPost } from '../db/mongo';
+import { TPost, dbBlog } from '../db/mongo';
 
-const Home: NextPage = () => {
+const Home = ({ posts }: { posts: TPost[] }) => {
   const router = useRouter();
-  const [posts, setPosts] = useState<TPost[]>([]);
+  // const [posts, setPosts] = useState<TPost[]>([]);
+  // const didRunRef = useRef(false);
 
-  const didRunRef = useRef(false);
+  // useEffect(() => {
+  //   if (didRunRef.current === false) {
+  //     didRunRef.current = true;
 
-  useEffect(() => {
-    if (didRunRef.current === false) {
-      didRunRef.current = true;
+  //     const getPosts = async () => {
+  //       fetch('/api/posts')
+  //         .then(res => res.json())
+  //         .then(data => {
+  //           setPosts(data);
+  //         })
+  //         .catch(err => console.error(err));
+  //     }
+  //     getPosts();
 
-      const getPosts = async () => {
-        fetch('/api/posts')
-          .then(res => res.json())
-          .then(data => {
-            setPosts(data);
-          })
-          .catch(err => console.error(err));
-      }
-      getPosts();
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  //   }
+  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className='space-y-6 pb-8'>
@@ -97,3 +97,16 @@ const Home: NextPage = () => {
 }
 
 export default Home;
+
+export async function getServerSideProps() {
+  try {
+    const posts: TPost[] = [];
+    const postsCOLL = (await dbBlog).collection<TPost>('posts');
+    const postsCURS = postsCOLL.find();
+    await postsCURS.forEach((item) => { posts.push(item) });
+    return { props: { posts: JSON.parse(JSON.stringify(posts)) } }
+  } catch (er) {
+    console.log(er);
+    return { props: { } }
+  }
+}

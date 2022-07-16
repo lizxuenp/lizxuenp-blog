@@ -4,7 +4,7 @@ import LeftBar from './leftbar';
 import RightBar from './rightbar';
 import Link from 'next/link';
 
-const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+// const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 const LayoutContext = React.createContext<{ }>({ });
 
@@ -13,48 +13,48 @@ type LayoutProps = {
 }
 
 export default function Layout({ children }: LayoutProps) {
-    const didRunRef = useRef(false);
+    // const didRunRef = useRef(false);
 
-    useIsomorphicLayoutEffect(() => {
-        if (didRunRef.current === false) {
-            didRunRef.current = true;
+    // useIsomorphicLayoutEffect(() => {
+    //     if (didRunRef.current === false) {
+    //         didRunRef.current = true;
 
-            // const auth = getAuth();
-            // let unsub = onAuthStateChanged(auth, (user) => {
-            //     if (user) {
-            //         // console.log('Layout/useEffect/onAuthStateChanged/logged-in', user);
-            //     } else {
-            //         // console.log('Layout/useEffect/onAuthStateChanged/logged-out');
-            //         if (!auth.currentUser) {
-            //             signInAnonymously(auth)
-            //                 .then(() => {
-            //                     // console.log('Layout/useEffect/onAuthStateChanged/signInAnonymously', auth.currentUser);
-            //                 })
-            //                 .catch((error) => {
-            //                     const errorCode = error.code;
-            //                     const errorMessage = error.message;
-            //                     console.log(errorCode, errorMessage);
-            //                 });
-            //         }
-            //     }
-            // });
-            // return unsub();
-        }
-    }, []);
+    //         // const auth = getAuth();
+    //         // let unsub = onAuthStateChanged(auth, (user) => {
+    //         //     if (user) {
+    //         //         // console.log('Layout/useEffect/onAuthStateChanged/logged-in', user);
+    //         //     } else {
+    //         //         // console.log('Layout/useEffect/onAuthStateChanged/logged-out');
+    //         //         if (!auth.currentUser) {
+    //         //             signInAnonymously(auth)
+    //         //                 .then(() => {
+    //         //                     // console.log('Layout/useEffect/onAuthStateChanged/signInAnonymously', auth.currentUser);
+    //         //                 })
+    //         //                 .catch((error) => {
+    //         //                     const errorCode = error.code;
+    //         //                     const errorMessage = error.message;
+    //         //                     console.log(errorCode, errorMessage);
+    //         //                 });
+    //         //         }
+    //         //     }
+    //         // });
+    //         // return unsub();
+    //     }
+    // }, []);
 
-    const didRunLERef = useRef(false);
-    useIsomorphicLayoutEffect(() => {
-        if (didRunLERef.current === false) {
-            didRunLERef.current = true;
-            if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
-                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.classList.add('dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                }
-            }
-        }
-    }, []);
+    // const didRunLERef = useRef(false);
+    // useIsomorphicLayoutEffect(() => {
+    //     if (didRunLERef.current === false) {
+    //         didRunLERef.current = true;
+    //         if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
+    //             if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    //                 document.documentElement.classList.add('dark');
+    //             } else {
+    //                 document.documentElement.classList.remove('dark');
+    //             }
+    //         }
+    //     }
+    // }, []);
 
     return (
         <>
@@ -64,7 +64,7 @@ export default function Layout({ children }: LayoutProps) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <LayoutContext.Provider value={{ }}>
-                <LeftBar />
+                <LeftBar /> 
                 <RightBar />
                 <div>
                     <div className='h-screen overflow-y-scroll scrollbar-hide'>

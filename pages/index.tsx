@@ -1,4 +1,5 @@
-import type { NextPage } from 'next';
+import Layout from '../components/layout';
+
 import Image from 'next/image';
 import sec from '../public/cyber-4511128_960_720.jpg';
 import IMG4 from '../public/IMG4-removebg-preview.png';
@@ -9,6 +10,7 @@ import { useRouter } from 'next/router';
 // import { useEffect, useRef, useState } from 'react';
 import Post from '../components/post';
 import { TPost, dbBlog } from '../db/mongo';
+import { ReactElement, ReactNode } from 'react';
 
 const Home = ({ posts }: { posts: TPost[] }) => {
   const router = useRouter();
@@ -94,6 +96,14 @@ const Home = ({ posts }: { posts: TPost[] }) => {
 
     </div>
   );
+}
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  )
 }
 
 export default Home;

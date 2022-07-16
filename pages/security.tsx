@@ -1,5 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import { ReactElement } from "react";
+import Layout from "../components/layout";
 
 export default function Security() {
     const { data: session } = useSession();
@@ -68,4 +70,12 @@ export default function Security() {
 
         </div>
     );
+}
+
+Security.getLayout = function getLayout(page: ReactElement) {
+    return (
+        <Layout>
+            {page}
+        </Layout>
+    )
 }

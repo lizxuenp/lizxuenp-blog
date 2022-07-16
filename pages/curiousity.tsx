@@ -1,3 +1,5 @@
+import { ReactElement } from "react";
+import Layout from "../components/layout";
 import TestDB from "../components/testdb/testdb";
 
 export default function Curiousity() {
@@ -10,4 +12,12 @@ export default function Curiousity() {
             </div>
         </div>
     );
+}
+
+Curiousity.getLayout = function getLayout(page: ReactElement) {
+    return (
+        <Layout>
+            {page}
+        </Layout>
+    )
 }

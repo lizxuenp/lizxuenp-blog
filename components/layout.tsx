@@ -76,7 +76,7 @@ export default function Layout({ children }: LayoutProps) {
                                 </a>
                             </Link>
                         </div>
-                        <div className='px-[120px]'>
+                        <div className='sm:px-[120px]'>
                             {children}
                         </div>
                     </div>

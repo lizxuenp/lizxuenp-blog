@@ -5,7 +5,7 @@ export default function LeftBar() {
     const router = useRouter();
 
     return (
-        <div className='fixed z-50 top-[108px] left-[64px]'>
+        <div className='hidden sm:block fixed z-50 top-[108px] left-[64px]'>
             <div className='flex flex-col items-center justify-evenly w-16 py-8 shadow-md rounded-xl 
                 bg-white dark:bg-gray-dark-liz'
             >

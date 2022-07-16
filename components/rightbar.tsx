@@ -6,7 +6,7 @@ export default function RightBar() {
     const router = useRouter();
     return (
 
-        <div className='fixed z-50 top-[108px] right-[64px] flex'>
+        <div className='hidden sm:flex fixed z-50 top-[108px] right-[64px] '>
             <div className='flex flex-col gap-4'>
                 {
                     router.asPath !== '/' &&

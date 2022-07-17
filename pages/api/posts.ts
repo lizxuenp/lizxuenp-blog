@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { dbBlog, TPost } from '../../db/mongo';
+import { dbBlog, TPost } from '../../lib/db';
 
 export default async function handler(
   req: NextApiRequest,

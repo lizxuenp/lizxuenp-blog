@@ -9,7 +9,7 @@ import { BeakerIcon, DotsCircleHorizontalIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/router';
 // import { useEffect, useRef, useState } from 'react';
 import Post from '../components/post';
-import { TPost, dbBlog } from '../db/mongo';
+import { TPost, dbBlog } from '../lib/db';
 import { ReactElement, ReactNode } from 'react';
 
 const Home = ({ posts }: { posts: TPost[] }) => {

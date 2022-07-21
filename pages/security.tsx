@@ -95,7 +95,7 @@ function TestProtectedAPI() {
             <button className='bg-gray-300 py-1 px-6 rounded-lg' onClick={handleTestProtectedAPI}>Test</button>
             <button className='text-gray-300 border-2 py-1 px-6 rounded-lg' onClick={()=>setResult('')}>Clear</button>
             </div>
-            <div className='text-white-liz text-xs'>
+            <div className='text-white-liz text-xs break-all'>
                 {result}
             </div>
         </div>

@@ -10,6 +10,16 @@ export default function Curiousity() {
             <div className='col-span-2'>
                 <TestDB />
             </div>
+
+            <div className='col-span-2 bg-gray-300 p-4 rounded-lg'>
+                <div className='font-bold font-potta-one text-xl'>Test Area</div>
+                <div>...</div>
+            </div>
+            <div className='bg-gray-300 p-4 rounded-lg'>
+                <div className='font-bold font-potta-one text-xl'>Test Area</div>
+                <div>...</div>
+            </div>
+            
         </div>
     );
 }

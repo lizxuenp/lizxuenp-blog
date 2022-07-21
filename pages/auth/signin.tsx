@@ -1,13 +1,26 @@
-import { BuiltInProviderType } from 'next-auth/providers';
-import { ClientSafeProvider, getProviders, LiteralUnion, signIn } from 'next-auth/react';
+
+import { GetServerSideProps } from 'next';
+import { getCsrfToken, signIn } from 'next-auth/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useRef } from 'react';
 import DarkModeButton from '../../components/darkmodebutton';
 import HomeButton from '../../components/homebutton';
 
-export default function SignIn({ providers }: { providers: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null } ) {
+// export default function SignIn({ csrfToken }: { csrfToken: string | undefined }) {
+export default function SignIn() {
     const router = useRouter();
+    const emailRef = useRef<HTMLInputElement | null>(null);
+    const passwordRef = useRef<HTMLInputElement | null>(null);
+
+    const handleSignIn = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        // const csrfTokenClient = await getCsrfToken();
+        // console.log('csrfTokenClient', csrfTokenClient);
+        signIn('credentials', { redirect: false, username: emailRef.current?.value, password: passwordRef.current?.value });
+    }
+
     return (
         <>
             <Head>
@@ -16,7 +29,7 @@ export default function SignIn({ providers }: { providers: Record<LiteralUnion<B
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className='flex h-screen w-screen'>
-                <div className='w-2/3 flex items-center justify-center'>
+                <div className='w-full sm:w-2/3 flex items-center justify-center'>
                     <div className='flex flex-col items-center gap-4 text-black-liz dark:text-white-liz w-full'>
 
                         <div className='font-bold text-3xl'>Sign In</div>
@@ -30,22 +43,29 @@ export default function SignIn({ providers }: { providers: Record<LiteralUnion<B
 
                         <div>or use your email to sign in</div>
 
-                        <div className='flex flex-col items-center justify-center gap-4 text-black-liz w-full'>
-                            <input type='text' placeholder='email'
-                                className='py-2 px-4 outline-none rounded-lg bg-gray-300 w-96'
-                            />
-                            <input type='password' placeholder='password'
-                                className='py-2 px-4 outline-none rounded-lg bg-gray-300 w-96'
-                            />
-                        </div>
+                        <form className='space-y-4'>
+                            <div className='flex flex-col items-center justify-center gap-4 text-black-liz w-full'>
+                                <input ref={emailRef} type='text' placeholder='email' required
+                                    className='py-2 px-4 outline-none rounded-lg bg-gray-300 w-2/3 sm:w-96'
+                                />
+                                <input ref={passwordRef} type='password' placeholder='password'
+                                    className='py-2 px-4 outline-none rounded-lg bg-gray-300 w-2/3 sm:w-96'
+                                />
+                            </div>
 
-                        <div className='flex justify-between w-96'>
-                            <button className='py-2 px-8 bg-gray-700 dark:bg-gray-600 text-white-liz rounded-full'>Sign In</button>
-                            <button className='py-2 px-8 bg-gray-400 dark:bg-gray-400 text-white-liz rounded-full' onClick={() => router.push('/')} >Cancel</button>
-                        </div>
+                            <div className='flex flex-col space-y-4 mt-4 sm:flex-row sm:space-y-0 sm:mt-0 justify-between w-2/3 sm:w-96'>
+                                <button
+                                    className='py-2 px-8 bg-gray-700 dark:bg-gray-600 text-white-liz rounded-full'
+                                    onClick={handleSignIn}
+                                >
+                                    Sign In
+                                </button>
+                                <button className='py-2 px-8 bg-gray-400 dark:bg-gray-400 text-white-liz rounded-full' onClick={() => router.push('/')} >Cancel</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div className='w-1/3 relative'>
+                <div className='w-1/3 relative hidden sm:block'>
                     <Image
                         src='https://res.cloudinary.com/lizxuen/image/upload/v1657974066/2593331_f4nl14.jpg'
                         alt='people'
@@ -64,9 +84,9 @@ export default function SignIn({ providers }: { providers: Record<LiteralUnion<B
     );
 }
 
-export async function getServerSideProps() {
-    const providers = await getProviders()
-    return {
-        props: { providers },
-    }
-}
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//     const csrfToken = await getCsrfToken(context)
+//     return {
+//         props: { csrfToken },
+//     }
+// }

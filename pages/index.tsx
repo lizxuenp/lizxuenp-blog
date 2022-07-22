@@ -4,6 +4,7 @@ import Image from 'next/image';
 import sec from '../public/cyber-4511128_960_720.jpg';
 import IMG4 from '../public/IMG4-removebg-preview.png';
 import octocat from '../public/Octocat.png';
+import linkedin from '../public/LI-In-Bug.png';
 
 import { BeakerIcon, DotsCircleHorizontalIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/router';
@@ -42,7 +43,9 @@ const Home = ({ posts }: { posts: TPost[] }) => {
         </div>
         <div className='h-64 lg:col-span-2 rounded-3xl bg-gradient-to-r from-rose-200 to-rose-300 relative'>
           <div className='relative w-[190px] h-full left-0'>
-            <Image src={IMG4} alt='IMG4' layout='fill' objectFit='contain' className='rounded-bl-3xl' />
+            <a href='https://www.facebook.com/profile.php?id=100082321243353' target='_blank' rel='noreferrer'>
+              <Image src={IMG4} alt='IMG4' layout='fill' objectFit='contain' className='rounded-bl-3xl' />
+            </a>
           </div>
           <div className='z-30 absolute top-8 right-8 sm:right-16 md:top-16 md:right-32 lg:right-4 xl:top-16 xl:right-16 rotate-12'>
             <a href='https://github.com/lizxuenp' target='_blank' rel='noreferrer'>
@@ -50,6 +53,11 @@ const Home = ({ posts }: { posts: TPost[] }) => {
             </a>
           </div>
 
+          <div className='z-30 absolute top-32 right-8 sm:right-16 md:top-16 md:right-16 lg:top-32 lg:right-4 xl:top-32 xl:right-2 -rotate-45'>
+            <a href='https://www.linkedin.com/in/lizxuenp' target='_blank' rel='noreferrer'>
+              <Image src={linkedin} alt='Octocat' height='48px' width='56px' />
+            </a>
+          </div>
 
         </div>
       </div>
@@ -117,6 +125,6 @@ export async function getServerSideProps() {
     return { props: { posts: JSON.parse(JSON.stringify(posts)) } }
   } catch (er) {
     console.log(er);
-    return { props: { } }
+    return { props: {} }
   }
 }
